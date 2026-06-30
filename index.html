@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKR PERFUME and FRAGRANCES | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-green: #062b1e; --brand-gold: #d4af37; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--brand-green); color: white; }
+        .brand-font { font-family: 'Cinzel', serif; }
+        .gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .gold-border { border-color: var(--brand-gold); }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="flex justify-between items-center px-8 py-6 border-b border-white/10">
+        <div class="text-2xl font-bold tracking-widest gold-gradient brand-font">AKR</div>
+        <ul class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+            <li><a href="collections1.html" class="hover:text-[#d4af37] transition-colors">Collections</a></li>
+            <li><a href="story.html" class="hover:text-[#d4af37] transition-colors">Our Story</a></li>
+            <li><a href="contact.html" class="hover:text-[#d4af37] transition-colors">Contact</a></li>
+        </ul>
+        <a href="collections1.html" class="px-6 py-2 border gold-border text-[#d4af37] hover:bg-[#d4af37] hover:text-[#062b1e] transition-all">Shop Now</a>
+    </nav>
+
+    <header class="relative h-[85vh] flex flex-col items-center justify-center text-center px-4">
+        <div class="mb-8">
+            <img src="images/akrlogo.png" 
+                 alt="AKR Logo" 
+                 class="w-56 h-56 object-contain rounded-full border-2 gold-border p-2 shadow-2xl">
+        </div>
+        <h1 class="text-4xl md:text-6xl mb-4 gold-gradient font-bold uppercase tracking-[0.2em] brand-font">AKR PERFUME</h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-2xl font-light italic mb-8">
+            "The Art of Premium Fragrance and Pure Attar"
+        </p>
+        <a href="collections1.html" class="bg-[#d4af37] text-[#062b1e] px-10 py-3 font-bold uppercase text-xs tracking-widest hover:bg-[#f4e1a1] transition-transform hover:-translate-y-1">
+            Explore Scents
+        </a>
+    </header>
+
+    <section class="py-24 bg-black/20 text-center">
+        <div class="max-w-4xl mx-auto px-8">
+            <h2 class="brand-font text-3xl gold-gradient mb-6 uppercase tracking-widest">Discover the Essence</h2>
+            <p class="text-gray-400 leading-relaxed mb-10">
+                Crafted for those who appreciate the finer things in life. Our scents are a blend of tradition and modern luxury, designed to leave a lasting impression.
+            </p>
+            <div class="h-[1px] w-40 bg-[#d4af37] mx-auto"></div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/10 text-center">
+        <div class="text-xl gold-gradient mb-4 brand-font uppercase">AKR PERFUME and FRAGRANCES</div>
+        <p class="text-gray-500 text-xs tracking-widest">© 2026 AKR Brand. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
