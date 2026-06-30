@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | AKR PERFUME and FRAGRANCES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-green: #062b1e; --brand-gold: #d4af37; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--brand-green); color: white; }
+        .brand-font { font-family: 'Cinzel', serif; }
+        .gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        input, textarea {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--brand-gold);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="p-6 border-b border-white/10 flex justify-between items-center">
+        <a href="index1.html" class="text-xs uppercase tracking-widest text-gray-400 hover:text-[#d4af37]">← Back to Home</a>
+        <div class="brand-font gold-gradient tracking-widest font-bold text-xl">AKR</div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-8 py-16 max-w-5xl">
+        <div class="text-center mb-12">
+            <h1 class="brand-font text-4xl md:text-5xl gold-gradient uppercase tracking-widest mb-4">Get In Touch</h1>
+            <p class="text-gray-400 italic">Direct Inquiry via WhatsApp</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <!-- Contact Info -->
+            <div class="space-y-8">
+                <div>
+                    <h2 class="brand-font text-xl text-[#d4af37] mb-2 uppercase">Direct Support</h2>
+                    <p class="text-gray-300 mb-4 text-sm">Fill out the form to start a chat with our fragrance experts.</p>
+                    <div class="text-lg font-bold text-[#d4af37] flex items-center gap-2">
+                        +91 78753 55465
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="brand-font text-xl text-[#d4af37] mb-2 uppercase">Location</h2>
+                    <p class="text-gray-300 text-sm">SHOP NO 16,GOSALIYA PARK,NEAR BUS DEPOT,<br>BOISAR,PALGHAR,MH 401 501,Maharashtra</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <form id="contactForm" class="space-y-6 bg-black/10 p-8 border border-white/5">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-[#d4af37] mb-2">Full Name</label>
+                    <input type="text" id="userName" class="w-full p-3 rounded-sm text-sm" placeholder="Your Name" required>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-[#d4af37] mb-2">Email Address</label>
+                    <input type="email" id="userEmail" class="w-full p-3 rounded-sm text-sm" placeholder="your@email.com" required>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-[#d4af37] mb-2">Your Message</label>
+                    <textarea id="userMessage" rows="4" class="w-full p-3 rounded-sm text-sm" placeholder="How can we help you today?" required></textarea>
+                </div>
+                <button type="submit" class="w-full py-4 bg-[#d4af37] text-[#062b1e] brand-font uppercase font-bold tracking-widest hover:bg-[#f4e1a1] transition-all">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent page refresh
+
+            const phone = "917875355465"; // Your target number
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const message = document.getElementById('userMessage').value;
+
+            // Formats the message for WhatsApp
+            const finalMessage = `Hello AKR Fragrances,\n\nI have a general inquiry:\n\n*Name:* ${name}\n*Email:* ${email}\n*Message:* ${message}`;
+            
+            // Opens WhatsApp
+            const encodedMessage = encodeURIComponent(finalMessage);
+            window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+        });
+    </script>
+
+    <footer class="py-12 border-t border-white/10 text-center">
+        <p class="text-gray-500 text-xs tracking-widest uppercase">AKR PERFUME and FRAGRANCES © 2026</p>
+    </footer>
+
+</body>
+</html>

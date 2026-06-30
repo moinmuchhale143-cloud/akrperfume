@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections | AKR PERFUME and FRAGRANCES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-green: #062b1e; --brand-gold: #d4af37; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--brand-green); color: white; overflow-x: hidden; }
+        .brand-font { font-family: 'Cinzel', serif; }
+        .gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .product-card { transition: all 0.4s ease; border: 1px solid rgba(255,255,255,0.1); }
+        .product-card:hover { border-color: var(--brand-gold); transform: translateY(-8px); background: rgba(0,0,0,0.3); }
+        
+        /* Cart Sidebar Styles */
+        #cart-sidebar {
+            transition: transform 0.3s ease-in-out;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        .cart-open { transform: translateX(0) !important; }
+    </style>
+</head>
+<body>
+
+    <nav class="p-6 border-b border-white/10 flex justify-between items-center sticky top-0 bg-[#062b1e] z-40">
+        <a href="index1.html" class="text-xs uppercase tracking-widest text-gray-400 hover:text-[#d4af37]">← Back to Home</a>
+        
+        <div class="flex items-center gap-6">
+            <button onclick="toggleCart()" class="relative text-[#d4af37] hover:scale-110 transition-transform p-2" aria-label="Open Cart">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span id="cart-count" class="absolute top-0 right-0 bg-white text-[#062b1e] text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+            </button>
+            <div class="brand-font gold-gradient tracking-widest font-bold text-xl">AKR</div>
+        </div>
+    </nav>
+
+    <header class="py-16 text-center">
+        <h1 class="brand-font text-5xl gold-gradient uppercase tracking-widest mb-2">Our All Collections</h1>
+        <p class="text-gray-400 text-sm italic tracking-widest">Premium Fragrances & Attars</p>
+    </header>
+
+    <section class="container mx-auto px-8 pb-24">
+        <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            </div>
+    </section>
+
+    <div id="product-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
+        <div onclick="closeModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        
+        <div class="relative bg-[#041f16] border border-white/10 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 rounded-sm shadow-2xl flex flex-col md:flex-row gap-8">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-sm tracking-widest uppercase z-10">✕ Close</button>
+            
+            <div class="w-full md:w-1/2 flex items-center justify-center">
+                <img id="modal-img" src="" alt="" class="w-full aspect-[4/5] object-cover border border-white/5 shadow-lg">
+            </div>
+            
+            <div class="w-full md:w-1/2 flex flex-col justify-between">
+                <div>
+                    <p id="modal-category" class="text-[10px] uppercase tracking-widest text-gray-500 mb-1"></p>
+                    <h2 id="modal-name" class="brand-font text-2xl md:text-3xl gold-gradient mb-2"></h2>
+                    <p id="modal-price" class="text-white font-bold text-lg mb-4"></p>
+                    
+                    <div class="h-[1px] w-full bg-white/10 mb-4"></div>
+                    
+                    <h4 class="text-xs uppercase tracking-widest text-[#d4af37] mb-2 font-bold">Fragrance Profile</h4>
+                    <p id="modal-desc" class="text-gray-400 text-sm leading-relaxed mb-6"></p>
+                </div>
+                
+                <div id="modal-actions" class="space-y-2 mt-auto">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-80 md:w-96 z-50 bg-[#041f16] border-l border-white/10 translate-x-full flex flex-col">
+        <div class="p-6 border-b border-white/10 flex justify-between items-center">
+            <h2 class="brand-font text-xl gold-gradient uppercase tracking-widest">Your Cart</h2>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-white uppercase text-xs">✕ Close</button>
+        </div>
+        
+        <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4">
+            <p class="text-gray-500 text-center italic mt-10">Your cart is empty</p>
+        </div>
+
+        <div class="p-6 border-t border-white/10 bg-[#062b1e]">
+            <div class="flex justify-between text-lg mb-4 brand-font">
+                <span>Total:</span>
+                <span id="cart-total" class="gold-gradient">₹0</span>
+            </div>
+            <button onclick="checkoutWhatsApp()" class="w-full bg-[#d4af37] text-[#062b1e] py-4 font-bold uppercase tracking-widest hover:bg-[#f4e1a1] transition-all">
+                Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
+
+    <script>
+        // 1. SETTINGS
+        const WHATSAPP_NUMBER = "917875355465";
+        let cart = [];
+
+        // 2. INVENTORY WITH EMBEDDED FRAGRANCE PROFILE DESCRIPTIONS
+        const inventory = [
+            { 
+                name: "Makkah Oud", 
+                category: "Premium Attar", 
+                price: 900, 
+                img: "images/makkahoud.jpeg",
+                desc: "An ultra-premium, deeply captivating oud oil built around complex woody top layers, classical rich spices, and long-lasting historic dry down properties."
+            },
+            { 
+                name: "Al Sabaya", 
+                category: "Premium Attar", 
+                price: 899, 
+                img: "images/alsabaya.jpeg",
+                desc: "A beautiful combination of bright sweet florals, citrus highlights, and a warm foundational musky finish perfect for day-to-day elegant wear."
+            },
+            { 
+                name: "Gucci Flora", 
+                category: "Pure Fragrance", 
+                price: 799, 
+                img: "images/gucciflora.jpeg",
+                desc: "An inspired masterpiece capture highlighting fresh velvet rose profiles, combined beautifully with rare peony accents and clean luxurious botanicals."
+            },
+            { 
+                name: "Mukhalat Rose", 
+                category: "Premium Perfume", 
+                price: 799, 
+                img: "images/mukhalatrose.jpeg",
+                desc: "A majestic royal synthesis blending traditional thick Turkish rose formulations alongside smooth base wood undertones for a striking projection."
+            },
+            { 
+                name: "Red Cristal", 
+                category: "Long Lasting Perfume", 
+                price: 699, 
+                img: "images/redcristal.jpeg",
+                desc: "A vibrant contemporary creation featuring brilliant exotic amber notes, crystalline floral sugars, and rich earthy cedar wood base foundations."
+            }
+        ];
+
+        // 3. DETAIL MODAL LOGIC
+        function openModal(index) {
+            const item = inventory[index];
+            
+            document.getElementById('modal-img').src = item.img;
+            document.getElementById('modal-img').alt = item.name;
+            document.getElementById('modal-category').innerText = item.category;
+            document.getElementById('modal-name').innerText = item.name;
+            document.getElementById('modal-price').innerText = `₹${item.price}`;
+            document.getElementById('modal-desc').innerText = item.desc;
+            
+            // Generate contextual layout button actions inside the modal pop-up box
+            document.getElementById('modal-actions').innerHTML = `
+                <button onclick="addToCart('${item.name}', ${item.price}); closeModal();" class="w-full py-3 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#062b1e] transition-all text-[10px] font-bold uppercase tracking-widest">
+                    Add to Cart
+                </button>
+                <button onclick="buyNow('${item.name}', ${item.price})" class="w-full py-3 bg-[#25D366] text-white hover:opacity-90 transition-all text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                    Buy Now via WhatsApp
+                </button>
+            `;
+            
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        // 4. CART LOGIC
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('cart-open');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+        }
+
+        function addToCart(name, price) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity += 1;
+            } else {
+                cart.push({ name, price: parseInt(price), quantity: 1 });
+            }
+            updateCartUI();
+            
+            // Automatically open cart slider drawer interface when an item is added
+            if(!document.getElementById('cart-sidebar').classList.contains('cart-open')) {
+                toggleCart();
+            }
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(i => i.name !== name);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            const totalLabel = document.getElementById('cart-total');
+            const countLabel = document.getElementById('cart-count');
+            
+            let total = 0;
+            let count = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center italic mt-10">Your cart is empty</p>';
+            } else {
+                container.innerHTML = cart.map(item => {
+                    total += item.price * item.quantity;
+                    count += item.quantity;
+                    return `
+                        <div class="flex justify-between items-center bg-white/5 p-3 border border-white/10 rounded">
+                            <div>
+                                <h4 class="text-xs font-bold uppercase gold-gradient">${item.name}</h4>
+                                <p class="text-gray-400 text-[10px]">₹${item.price} x ${item.quantity}</p>
+                            </div>
+                            <button onclick="removeFromCart('${item.name}')" class="text-red-500 text-[10px] uppercase">Remove</button>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            totalLabel.innerText = `₹${total}`;
+            countLabel.innerText = count;
+        }
+
+        // 5. WHATSAPP CHECKOUT (BUNDLED LIST)
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return alert("Your cart is empty!");
+            
+            let message = "*NEW ORDER - AKR FRAGRANCES*%0A%0A";
+            let total = 0;
+            
+            cart.forEach(item => {
+                message += `• *${item.name}* (x${item.quantity}) - ₹${item.price * item.quantity}%0A`;
+                total += item.price * item.quantity;
+            });
+            
+            message += `%0A*TOTAL AMOUNT: ₹${total}*%0A%0APlease confirm my order.`;
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+        }
+
+        // 6. DIRECT BUY (ONE ITEM ONLY)
+        function buyNow(name, price) {
+            const message = `Hello AKR Fragrances, I would like to buy *${name}* (Price: ₹${price}) immediately.`;
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // 7. RENDER PRODUCTS TO MAIN LIST GRID
+        function loadProducts() {
+            const productContainer = document.getElementById('product-list');
+            productContainer.innerHTML = inventory.map((item, index) => `
+                <div class="product-card bg-black/20 p-5 rounded-sm flex flex-col">
+                    <div onclick="openModal(${index})" class="cursor-pointer group flex-grow">
+                        <div class="overflow-hidden mb-6 border border-white/5">
+                            <img src="${item.img}" alt="${item.name}" class="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-1">${item.category}</p>
+                        <h3 class="brand-font text-xl text-[#d4af37] mb-2">${item.name}</h3>
+                        <p class="text-white font-bold mb-6">₹${item.price}</p>
+                    </div>
+                    
+                    <div class="mt-auto space-y-2">
+                        <button onclick="addToCart('${item.name}', ${item.price})" class="w-full py-3 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#062b1e] transition-all text-[10px] font-bold uppercase tracking-widest">
+                            Add to Cart
+                        </button>
+                        <button onclick="buyNow('${item.name}', ${item.price})" class="w-full py-3 bg-[#25D366] text-white hover:opacity-90 transition-all text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                            Buy Now via WhatsApp
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        loadProducts();
+    </script>
+</body>
+</html>
